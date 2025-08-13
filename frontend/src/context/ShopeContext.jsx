@@ -11,7 +11,7 @@ const ShopeContextProvider = (props) => {
     const currrency = "$";
     const delivery_fee = 10;
     const backendUrl = import.meta.env.VITE_BACKEND_URL
-    // console.log(backendUrl);
+    console.log(backendUrl);
     
 
     const [search, setSearch] = useState('');
@@ -48,7 +48,7 @@ const ShopeContextProvider = (props) => {
 
         if (token) {
             try {
-                await axios.post('http://localhost:4000' + '/api/cart/add', { itemId, size }, { headers: { token } })
+                await axios.post(backendUrl+ '/api/cart/add', { itemId, size }, { headers: { token } })
             } catch (error) {
                 console.log(error);
                 toast.error(error.message)
@@ -80,7 +80,7 @@ const ShopeContextProvider = (props) => {
 
         if (token) {
             try {
-                await axios.post('http://localhost:4000' + '/api/cart/update', { itemId, size, quantity }, { headers: { token } })
+                await axios.post(backendUrl+ '/api/cart/update', { itemId, size, quantity }, { headers: { token } })
             } catch (error) {
                 console.log(error);
                 toast.error(error.message)
@@ -109,7 +109,7 @@ const ShopeContextProvider = (props) => {
 
     const getProductsData = async () => {
         try {
-            const respnse = await axios.get('http://localhost:4000'
+            const respnse = await axios.get(backendUrl
                 + '/api/product/list')
             // console.log(respnse.data);
 
@@ -130,7 +130,7 @@ const ShopeContextProvider = (props) => {
 
         try {
 
-            const response = await axios.post('http://localhost:4000' + '/api/cart/get', {}, { headers: { token } })
+            const response = await axios.post(backendUrl + '/api/cart/get', {}, { headers: { token } })
 
             if (response.data.success) {
                 setCartItems(response.data.cartData)
